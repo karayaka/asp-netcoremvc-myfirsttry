@@ -1,0 +1,37 @@
+﻿@using projeDeneme.Models
+@model List<Modelmysql>
+        
+
+@{
+        Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table>
+        @foreach(var item in Model)
+        {
+        <tr>
+            <td>
+                @item.ID
+            </td>
+            <td>
+                @item.Ad
+            </td>
+            <td>
+                @item.Soyad
+            </td>
+            <td>
+                @item.Email
+            </td>
+        </tr>
+        }
+    </table>
+</body>
+</html>

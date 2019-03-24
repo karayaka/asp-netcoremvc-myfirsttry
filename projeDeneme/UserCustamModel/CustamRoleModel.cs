@@ -8,7 +8,7 @@ namespace projeDeneme.UserCustamModel
 {
     public class CustamRoleModel:IdentityRole
     {
-        
+        //tolga hocaya sor onlar nasıl yapıyorlarmış farklı kullanıcı modellerini---
         
     }
 }

@@ -95,7 +95,7 @@ namespace projeDeneme.Controllers
 
                 string path_Root = _hostingEnvironment.WebRootPath;
 
-                path_to_image = path_Root + "\\UserFile\\Images\\Images" + file.FileName;
+                path_to_image = path_Root + "\\wwwroot\\UserFile\\Images\\Images" + file.FileName;
                 //dosyayı hedefe kopyalayıp yolu db ye gönderceğiz
 
                 using (var stream = new FileStream(path_to_image, FileMode.Create))
@@ -130,6 +130,7 @@ namespace projeDeneme.Controllers
 
 
 
+
             //Email Gönderilecek Kod Blogu;           
 
 
@@ -142,6 +143,7 @@ namespace projeDeneme.Controllers
                 return RedirectToAction("Index", "Home");
             }
             var user = await _userManager.FindByIdAsync(userId);
+            
             if (user == null)
             {
                 throw new ApplicationException("Kullanıcı biligilerine ulaşılamadı");
@@ -150,13 +152,18 @@ namespace projeDeneme.Controllers
             var result = await _userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
             {
-                return View("ConfirmEmail");
+                return RedirectToAction("chosePlan", "Security");
             }
 
 
             return RedirectToAction("Index", "Home");
 
         }
+        public IActionResult chosePlan()
+        {
+             return View();
+        }
+
         public IActionResult ForgotPassword()
         {
             return View();

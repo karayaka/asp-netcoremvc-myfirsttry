@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace projeDeneme.Identity
 {
-    public class AppIdentityRole:IdentityRole
+    public class AppIdentityRole : IdentityRole
     {
         //Roller Eklenecek
+        public AppIdentityRole(string roleName) : base(roleName)
+        {
+        }
     }
 }

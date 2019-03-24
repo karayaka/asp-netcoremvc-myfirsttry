@@ -75,6 +75,29 @@ namespace projeDeneme
             services.AddSession();
 
         }
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var rolManager = serviceProvider.GetRequiredService<RoleManager<AppIdentityRole>>();
+            IdentityResult roleRuselt;
+            var rolCheck= await rolManager.RoleExistsAsync("Admin");
+            if (!rolCheck)
+            {
+                roleRuselt = await rolManager.CreateAsync(new AppIdentityRole("Admin"));
+
+            }
+            rolCheck = await rolManager.RoleExistsAsync("Kullanici");
+            if (!rolCheck)
+            {
+                roleRuselt = await rolManager.CreateAsync(new AppIdentityRole("Kullanici"));
+
+            }
+            rolCheck = await rolManager.RoleExistsAsync("Musteri");
+            if (!rolCheck)
+            {
+                roleRuselt = await rolManager.CreateAsync(new AppIdentityRole("Musteri"));
+
+            }
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

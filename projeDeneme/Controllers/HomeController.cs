@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using projeDeneme.Identity;
 using projeDeneme.Models;
 
 namespace projeDeneme.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<AppIdentityUser> _userManager;
         private ModelmysqlContext _context;
         //ModelmysqlContext db = new ModelmysqlContext();
-        public HomeController(ModelmysqlContext context)
+        public HomeController(ModelmysqlContext context, UserManager<AppIdentityUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -23,11 +26,18 @@ namespace projeDeneme.Controllers
 
             return View(model);
         }
-        public ActionResult Index2(string id)
+        public ActionResult Index3()
         {
-            var user = HttpContext.User.Identity;
+            var model = _context.Modelmysqls.ToList();
 
-            return View(user);
+            return Json(model);
+        }
+        public ActionResult Index2()
+        {
+            //oturumdaki User Id:
+            var user = _userManager.GetUserId(HttpContext.User);
+            ViewBag.user = user;
+            return View();
         }
         public ActionResult Yeni()
         {           
